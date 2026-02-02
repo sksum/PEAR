@@ -81,7 +81,7 @@ python inference_images.py --input_path example/images
 ## 🤗 Citation
 If you find this repository useful for your research, please use the following BibTeX entry for citation.
 
-    @misc{wu2026pearpixelalignedexpressivehuman,
+    @misc{wu2026pear,
       title={PEAR: Pixel-aligned Expressive humAn mesh Recovery}, 
       author={Jiahao Wu and Yunfei Liu and Lijian Lin and Ye Zhu and Lei Zhu and Jingyi Li and Yu Li},
       year={2026},
