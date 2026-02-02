@@ -49,10 +49,10 @@ We propose PEAR, a unified framework for real-time expressive 3D human mesh reco
 
 ## ⚡ Quick Start
 
-First, clone this repository to your local machine, and install the dependencies. 
+### First, clone this repository to your local machine, and install the dependencies. 
 
 ```bash
-git clone --recursive 
+git clone --recursive https://github.com/Pixel-Talk/PEAR.git
 cd PEAR
 conda create -n pear python=3.9.22
 conda activate pear
@@ -60,6 +60,11 @@ pip install -r requirements.txt
 pip install "git+https://github.com/facebookresearch/pytorch3d.git" --no-build-isolation
 pip install chumpy  --no-build-isolation
 ```
+
+### Second, you need to download three human models (FLAME. MANO, SMPLX) from [huggingface url](https://huggingface.co/spaces/BestWJH/PEAR/tree/main/assets) into the current `assets` folder.
+
+
+### Finally, you can have a try !
 
 For video inference, you can simply run our visualization interface via
 ```bash
@@ -76,9 +81,19 @@ python inference_images.py --input_path example/images
 ## 🤗 Citation
 If you find this repository useful for your research, please use the following BibTeX entry for citation.
 
-    @misc{PEAR,
-
+    @misc{wu2026pearpixelalignedexpressivehuman,
+      title={PEAR: Pixel-aligned Expressive humAn mesh Recovery}, 
+      author={Jiahao Wu and Yunfei Liu and Lijian Lin and Ye Zhu and Lei Zhu and Jingyi Li and Yu Li},
+      year={2026},
+      eprint={2601.22693},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2601.22693}, 
     }
+
+## Acknowledgements 
+
+We would like to thank the authors of prior works, including FLAME, SMPL-X, SMPL, MANO, SMPLest-X, Multi-HMR, and SAM3D-Body.
 
 
 ## License
