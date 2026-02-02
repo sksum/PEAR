@@ -64,6 +64,18 @@ pip install chumpy  --no-build-isolation
 ### Second, you need to download three human models (FLAME. MANO, SMPLX) from [huggingface url](https://huggingface.co/spaces/BestWJH/PEAR/tree/main/assets) into the current `assets` folder.
 
 
+```
+├── assets
+│   | FLAME
+│   | MANO
+│   | SMPLX
+|   icons2.png
+|   method.png
+|   teaser.png
+```
+
+
+
 ### Finally, you can have a try !
 
 For video inference, you can simply run our visualization interface via
