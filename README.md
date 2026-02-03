@@ -57,6 +57,7 @@ We propose PEAR, a unified framework for real-time expressive 3D human mesh reco
 ```bash
 git clone --recursive https://github.com/Pixel-Talk/PEAR.git
 cd PEAR
+# These PyTorch, Python, and CUDA versions are not strict; most configurations can run successfully.
 conda create -n pear python=3.9.22
 conda activate pear
 pip install -r requirements.txt
