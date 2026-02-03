@@ -18,7 +18,7 @@ BACKBONE:
     qkv_bias : True
     ratio : 1
     use_checkpoint : False
-    backbone_ckpt : "/cto_studio/wujiahao/HSMR/data_inputs/backbone/vitpose_backbone.pth"
+    backbone_ckpt : "data_inputs/backbone/vitpose_backbone.pth"
 
 HEAD:
     context_dim : 1280

@@ -6,7 +6,7 @@ import numpy as np
 
 
 smplx_model = smplx.SMPLX(
-                model_path="/cto_studio/wujiahao/Gen_Ubody_test/assets/SMPLX/SMPLX_NEUTRAL_2020.npz",
+                model_path="./assets/SMPLX/SMPLX_NEUTRAL_2020.npz",
                 gender="neutral",
                 use_pca=False,
                 flat_hand_mean=True,
