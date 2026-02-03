@@ -44,17 +44,6 @@ class Ehm_Pipeline(L.LightningModule):
         '''
         # save_image(x[:, :, :, 32:-32],"input.jpg")
         x = self.normalize(x)
-        B = len(x)
-
-        # 1. Extract features from image.
-        #  The input size is 256*256, but ViT needs 256*192. TODO: make this more elegant.
-        assert x.numel() > 0
-        assert x.shape[0] > 0
-        W = x.shape[-1]
-        if W <= 64:
-            raise ValueError(f"Input width too small: {W}")
-        if x.shape[0] == 0:
-            return None
         feats = self.backbone(x[:, :, :, 32:-32])
 
         # 2. Run the head to predict the body model parameters.

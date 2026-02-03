@@ -16,8 +16,8 @@ class EHM_v2(nn.Module):
                        check_pose=True, use_pca=True, num_pca_comps=6, flat_hand_mean=False, uv_size= 512):
         super().__init__()
         self.smplx = SMPLX(smplx_assets_dir, n_shape=n_shape, n_exp=n_exp, check_pose=check_pose, with_texture = with_texture, add_teeth=add_teeth, uv_size= uv_size)
-        self.flame = FLAME(flame_assets_dir, n_shape=n_shape, n_exp=n_exp, with_texture=with_texture, add_teeth=add_teeth) # 加牙齿
-        # self.mano  = MANO(mano_assets_dir, use_pca=use_pca, num_pca_comps=num_pca_comps, flat_hand_mean=flat_hand_mean)  # 没用 
+        self.flame = FLAME(flame_assets_dir, n_shape=n_shape, n_exp=n_exp, with_texture=with_texture, add_teeth=add_teeth) 
+        # self.mano  = MANO(mano_assets_dir, use_pca=use_pca, num_pca_comps=num_pca_comps, flat_hand_mean=flat_hand_mean)  
         
         v_template,  v_head_template  =  self.smplx.v_template.clone(),  self.flame.v_template.clone()
         tbody_joints = vertices2joints(self.smplx.J_regressor, v_template[None]) # [1,55,3]
@@ -99,13 +99,6 @@ class EHM_v2(nn.Module):
         hand_scale        = body_param_dict['hand_scale']    # torch.Size([1])
         batch_size = shape_params.shape[0]
         
-        # if proj_type == 'orth':
-        #     projection_func = self.smplx.batch_orth_proj
-        # elif proj_type == 'dummy':
-        #     projection_func = self.dummy_proj
-        # else:
-        #     projection_func = self.smplx.batch_week_cam_to_perspective_proj
-
         if expression_params is None: 
             expression_params = self.expression_params.expand(batch_size, -1)
         if global_pose is None: 
@@ -165,23 +158,6 @@ class EHM_v2(nn.Module):
             selected_head[:, self.flame.non_head_index] = ori_selected_head[:, self.flame.non_head_index]       # recover the neck and boundary vertices
             new_template_vertices[:, self.smplx.smplx2flame_ind] = selected_head
 
-        # if hand_scale is not None:  #  关闭 hand scale  2025.12.5
-        #     left_hand_vert = new_template_vertices[:, self.smplx.smplx2mano_ind['left_hand']].clone()
-        #     right_hand_vert = new_template_vertices[:, self.smplx.smplx2mano_ind['right_hand']].clone()
-
-        #     left_hand_vert = left_hand_vert * hand_scale[:, None] + (1-hand_scale[:, None]) * self.smplx.left_hand_center
-        #     right_hand_vert = right_hand_vert * hand_scale[:, None] + (1-hand_scale[:, None]) * self.smplx.right_hand_center
-
-        #     new_template_vertices[:, self.smplx.smplx2mano_ind['left_hand']] = left_hand_vert
-        #     new_template_vertices[:, self.smplx.smplx2mano_ind['right_hand']] = right_hand_vert
-
-
-        # 为啥这里又重新计算 vertices 和 joints  
-        # vertices, joints, J, ver_transform_mat, joint_transform_mat = lbs( torch.zeros_like(shape_components), full_pose, new_template_vertices, #
-        #                                     self.smplx.shapedirs, self.smplx.posedirs,        # shapedirs[10475, 3, 20]
-        #                                     self.smplx.J_regressor, self.smplx.parents,       # J_regressor([55, 10475])
-        #                                     self.smplx.lbs_weights,joints_offset=joints_offset, dtype=self.smplx.dtype)   # template_vertices（10475x3）
-
         vertices, joints, J, ver_transform_mat, joint_transform_mat = lbs_wobeta( full_pose, new_template_vertices,#
                                             self.smplx.posedirs,       
                                             self.smplx.J_regressor, self.smplx.parents,       # J_regressor([55, 10475])
@@ -213,11 +189,11 @@ class EHM_v2(nn.Module):
         # Create the final joint set  
         joints = torch.cat(final_joint_set, dim=1) # [1, 145, 3]      
 
-        if self.smplx.use_joint_regressor:  # True  这是干啥的
+        if self.smplx.use_joint_regressor:
             reg_joints = torch.einsum(
                 'ji,bik->bjk', self.smplx.extra_joint_regressor, vertices)
             replace_idxs = torch.tensor([2,3,6,7,8,9,10,11,12,13],device=joints.device).long() # [2, 3, 4, ..., 145]
-            joints[:, self.smplx.source_idxs[replace_idxs].long()] = (  # 在这里可以把 前面两个不进行替换
+            joints[:, self.smplx.source_idxs[replace_idxs].long()] = ( 
                 joints[:, self.smplx.source_idxs[replace_idxs].long()].detach() * 0.0 +
                 reg_joints[:, self.smplx.target_idxs[replace_idxs].long()] * 1.0
             )
@@ -228,18 +204,9 @@ class EHM_v2(nn.Module):
         # save predcition
         prediction = {  #  [B,10475,3]
             'vertices': vertices,
-            # 'face_kpt': landmarks,  # [1,68,3]
             'joints': joints,  # [B,145,3]
             'ver_transform_mat':ver_transform_mat, # transform matrix per vertex
             'ori_head_vertices':ori_head_vertices,
-            # 'head_vertices': vertices[:, self.smplx.smplx2flame_ind][:, self.head_index],
-            # 'head_ref_joint': joints[:, 23:25].mean(dim=1, keepdim=True),
-
-            # 'left_hand_vertices': vertices[:, self.smplx.smplx2mano_ind['left_hand']],
-            # 'left_hand_ref_joint': joints[:, 20:21, :],
-
-            # 'right_hand_vertices': vertices[:, self.smplx.smplx2mano_ind['right_hand']],
-            # 'right_hand_ref_joint': joints[:, 21:22, :],
         }
 
         ret_dict.update(prediction)

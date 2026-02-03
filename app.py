@@ -5,10 +5,8 @@ import sys
 import importlib
 
 def migrate_precompiled_packages():
-    # 1. 获取目标 site-packages 路径
     target_site_packages = site.getsitepackages()[0]
-    
-    # 定义需要迁移的包及其对应的关键模块名（用于存在性检查）
+
     packages_to_check = {
         'pytorch3d': ['pytorch3d', 'pytorch3d-0.7.8.dist-info'],
         'chumpy': ['chumpy', 'chumpy-0.70.dist-info']
@@ -47,7 +45,6 @@ def migrate_precompiled_packages():
     if target_site_packages not in sys.path:
         sys.path.insert(0, target_site_packages)
 
-    # 3. 针对 PyTorch3D 的动态链接补丁 (解决 libc10.so 找不到的问题)
     try:
         import torch
         torch_lib_path = os.path.join(os.path.dirname(torch.__file__), "lib")
@@ -59,7 +56,6 @@ def migrate_precompiled_packages():
 
 # migrate_precompiled_packages()
 
-# 验证安装
 try:
     import chumpy
     import pytorch3d

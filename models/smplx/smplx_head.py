@@ -287,12 +287,7 @@ class SMPLXTransformerDecoderHead(nn.Module):
         body_param_dict['body_pose'] =  self.rot6d_to_rotmat( smplx_pose[:,6:132].unsqueeze(1).reshape((-1,21,6)) )  # * 0.5
         body_param_dict['left_hand_pose'] = self.rot6d_to_rotmat( smplx_pose[:,132:222].unsqueeze(1).reshape((-1,15,6)) )
         body_param_dict['right_hand_pose'] = self.rot6d_to_rotmat( smplx_pose[:,222:312].unsqueeze(1).reshape((-1,15,6)) )
-        # full_pose = torch.cat([global_pose,  # [B,1,3]
-        #                        body_pose,  # [B,21,3]
-        #                        jaw_pose,   # [B,1,3]
-        #                        eye_pose, # [B,2,3]
-        #                        left_hand_pose,  # [B,15,3]
-        #                        right_hand_pose], dim=1) # # [B, 1+21+1+2+15+15, 3]
+
 
         smplx_scale = self.smplx_scale_decoder(token_out)
         body_param_dict['hand_scale'] = smplx_scale[:,:3] 
@@ -305,7 +300,6 @@ class SMPLXTransformerDecoderHead(nn.Module):
         body_param_dict['shape'] = self.smplx_shape_decoder(token_out)
 
 
-        # T 太大了，应该乘以一个系数 10   最后的深度不应该这样学，是不是学一个 scale 更好
         bias = torch.tensor([ 0, 0, 1.5], device=token_out.device)
         pd_cam = self.cam_decoder(token_out)
         pd_cam += bias
