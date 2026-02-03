@@ -33,10 +33,13 @@
 </div>
 
 
-## 📰 News
-**[2026.02.02]** The inference code and the first version of the PEAR model have been released!
 
+## 📰 News
 **[2026.02.02]** Paper release of our PEAR on arXiv!
+
+**[2026.02.02]** The inference code and the first version of the PEAR model have been released! 
+
+**[TODO]** Training code, training dastasets and final version of the PEAR model.
 
 
 ## 💡 Overview

@@ -1040,39 +1040,3 @@ class FlameMask(nn.Module):
         uniques, counts = combined.unique(return_counts=True)
         return uniques[counts == 1]
 
-
-if __name__=="__main__":
-    
-    def save_obj(filename, vertices, faces):
-        """Saves a 3D mesh to an OBJ file."""
-        with open(filename, 'w') as f:
-            for v in vertices:
-                f.write('v {:.4f} {:.4f} {:.4f}\n'.format(v[0], v[1], v[2]))
-            for face in faces:
-                # OBJ indices are 1-based, so we add 1 to each vertex index
-                f.write('f {} {} {}\n'.format(face[0] + 1, face[1] + 1, face[2] + 1))
-                
-    from PIL import Image
-    #python -m models.modules.flame.FLAME
-    num_shape=200
-    num_exp=50
-    batch_size=1
-    device='cpu'
-    flame=FLAME("/cto_labs/zhangdongbin/code/Gen-Ubody-Avatar/assets/FLAME",n_shape=num_shape,
-                n_exp=num_exp,add_teeth=True).to(device)
-
-    jaw_pose=torch.randn(batch_size, 1, 3, device=device)*0.01
-    jaw_pose[:,:,0]=0.3
-    param_dict = {
-        'shape_params': torch.randn(batch_size, num_shape, device=device)*0.2,
-        'expression_params': torch.randn(batch_size, num_exp, device=device)*0.75,
-        'pose_params': torch.zeros(batch_size, 1, 3, device=device),
-        'neck_pose_params': torch.zeros(batch_size, 1, 3, device=device),
-        'jaw_params': jaw_pose,
-        'eye_pose_params': torch.zeros(batch_size, 2, 3, device=device),
-    }
-    out =flame(param_dict)
-    vertices = out['vertices'][0].detach().cpu().numpy()
-    faces = flame.faces_tensor.cpu().numpy()
-    save_obj(f'/cto_labs/zhangdongbin/code/Gen-Ubody-Avatar/z_temp/output_flame_teeth.obj', vertices, faces)
-    print(f"Saved output vertices.obj")

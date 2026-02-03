@@ -792,31 +792,6 @@ def save_visual_prj(vertex_prj,batch_images):
     
     #cameras.get_ndc_to_screen_transform(cameras, with_xyflip=True, image_size=image_size)
 
-def save_visual_pixel_to_uv(img,origi_img,faces_uv,uv_coords,name='visual_pixel_to_uv'):
-    import cv2
-    import copy
-    def cv2_triangle(img, p123):
-        ''' draw triangles using OpenCV '''
-        p1, p2, p3 = (tuple(i) for i in p123)
-        cv2.line(img, p1, p2, (0, 255, 0), 1) 
-        cv2.line(img, p2, p3, (0, 255, 0), 1) 
-        cv2.line(img, p1, p3, (0, 255, 0), 1)
-        return img
-    uv_coords=np.round(uv_coords*img.shape[1]).astype(np.int32)
-    
-    img=img.detach().cpu().numpy().transpose(1,2,0)
-    origi_img= origi_img.detach().cpu().numpy().transpose(1,2,0)
-    img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
-    origi_img=cv2.cvtColor(origi_img, cv2.COLOR_RGB2BGR)
-    
-    img_uint8 = (img * 255).astype(np.uint8)
-    origi_img=(origi_img * 255).astype(np.uint8)
-    
-    img_=copy.deepcopy(img_uint8)
-    for f_idx in range(len(faces_uv)):
-        cv2_triangle(img_uint8,uv_coords[faces_uv[f_idx]])
-    img_uint8=np.concatenate([img_uint8,img_,origi_img],axis=1)
-    cv2.imwrite(f"/cto_labs/zhangdongbin/code/Gen-Ubody-Avatar/z_temp/{name}.png", img_uint8)
 
 def save_visual_images(images,save_path):
     import torchvision.utils as vutils

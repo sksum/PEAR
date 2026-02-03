@@ -878,7 +878,6 @@ def get_uvmap_faces_index(faces_uv,uv_coords,uv_size=512):
     for f_idx in range(len(faces_uv)):
         cv2.drawContours(uvmap_faces_idx, [uv_coords[faces_uv[f_idx]]], 0, int(f_idx), -1)
     #     cv2_triangle(temp_maps,uv_coords[faces_uv[f_idx]])
-    # cv2.imwrite("/cto_labs/zhangdongbin/code/Gen-Ubody-Avatar/z_temp/uv_triangle.png", temp_maps * 255)
     return uvmap_faces_idx
 
 def get_uvmap_faces_barycoord(uvmap_faces_idx,faces_uv,uv_coords,uv_size=512):
@@ -945,47 +944,3 @@ class OBJLoader:
         except Exception as e:
             print(f"Error loading OBJ file: {e}")
             
-if __name__=="__main__":
-    
-    def save_obj(filename, vertices, faces):
-        """Saves a 3D mesh to an OBJ file."""
-        with open(filename, 'w') as f:
-            for v in vertices:
-                f.write('v {:.4f} {:.4f} {:.4f}\n'.format(v[0], v[1], v[2]))
-            for face in faces:
-                # OBJ indices are 1-based, so we add 1 to each vertex index
-                f.write('f {} {} {}\n'.format(face[0] + 1, face[1] + 1, face[2] + 1))
-                
-    from PIL import Image
-    #python -m smplx.SMPLX
-    #python -m models.modules.smplx.SMPLX
-    num_shape=200
-    num_exp=50
-    batch_size=1
-    device='cpu'
-    smplx=SMPLX("/cto_labs/zhangdongbin/code/Gen-Ubody-Avatar/assets/SMPLX",n_shape=num_shape,
-                n_exp=num_exp,add_teeth=True).to(device)
-    # pm_normalized_data=((smplx.position_map)-smplx.position_map.min())/(smplx.position_map.max()-smplx.position_map.min())
-    # pm_image_data = (pm_normalized_data.cpu().numpy() * 255).astype(np.uint8)
-    # pm_image = Image.fromarray(pm_image_data)
-    # image_path = join( f'position_map.png')
-    # pm_image.save(image_path)
-    jaw_pose=torch.randn(batch_size, 1, 3, device=device)*0.0
-    jaw_pose[:,:,0]=0.3
-    param_dict = {
-        'shape': torch.randn(batch_size, num_shape, device=device)*0.2,
-        'exp': torch.randn(batch_size, num_exp, device=device)*0.75,
-        'global_pose': torch.zeros(batch_size, 1, 3, device=device),
-        'body_pose': torch.zeros(batch_size, 21, 3, device=device),
-        'jaw_pose': jaw_pose,
-        'left_hand_pose': torch.zeros(batch_size, 15, 3, device=device),
-        'right_hand_pose': torch.zeros(batch_size, 15, 3, device=device),
-        'eye_pose': torch.zeros(batch_size, 2, 3, device=device),
-    }
-    out =smplx(param_dict)
-    vertices = out['vertices'][0].detach().cpu().numpy()
-    faces = smplx.faces_tensor.cpu().numpy()
-    save_obj(f'/cto_labs/zhangdongbin/code/Gen-Ubody-Avatar/z_temp/output_smplx_teeth.obj', vertices, faces)
-    print(f"Saved output vertices.obj")
-    
-    
