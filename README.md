@@ -22,9 +22,10 @@
 <div id="top" align="center">
 
 [![arXiv](https://img.shields.io/badge/arXiv-2602.22693-b31b1b.svg)](https://www.arxiv.org/abs/2601.22693)
-[![](https://img.shields.io/badge/%F0%9F%9A%80%20-Project%20Page-blue)](https://wujh2001.github.io/PEAR//)
+[![ProjectPage](https://img.shields.io/badge/%F0%9F%9A%80%20-Project%20Page-blue)](https://wujh2001.github.io/PEAR//)
 [![Youtube](https://img.shields.io/badge/▶️-Youtube-red)](https://www.youtube.com/watch?v=FFnuDwXGA_M)
-[![Youtube](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Live_Demo-blue)](https://huggingface.co/spaces/BestWJH/PEAR)
+[![huggingface](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Live_Demo-blue)](https://huggingface.co/spaces/BestWJH/PEAR)
+[![Model](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Live_Demo-blue)](https://huggingface.co/spaces/BestWJH/PEAR)
 
 </div>
 
@@ -82,11 +83,13 @@ pip install chumpy  --no-build-isolation
 
 ### Finally, you can have a try !
 
+`All pretrained models will be downloaded automatically.`
+
 For video inference, you can simply run our visualization interface via
 ```bash
 python app.py 
 ```
-For images inference, you can simply run our visualization interface via
+For images inference, you can simply run the code via
 ```bash
 python inference_images.py --input_path example/images 
 ```
