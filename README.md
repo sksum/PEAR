@@ -38,7 +38,9 @@
 
 **[2026.02.02]** The inference code and the first version of the PEAR model have been released! 
 
-**[TODO]** Training code, training dastasets and final version of the PEAR model.
+**[2026.02.11]** Training code released.
+
+**[TODO]** Training dastasets and final version of the PEAR model.
 
 
 ## 💡 Overview
@@ -49,50 +51,83 @@
 
 We propose PEAR, a unified framework for real-time expressive 3D human mesh recovery. It is the first method capable of simultaneously predicting EHM-s parameters at 100 FPS.
 
+
+
 ## ⚡ Quick Start
 
-### First, clone this repository to your local machine, and install the dependencies. 
+### 🔧 Preparation
+
+Clone this repository and install the dependencies:
 
 ```bash
 git clone --recursive https://github.com/Pixel-Talk/PEAR.git
 cd PEAR
-# These PyTorch, Python, and CUDA versions are not strict; most configurations can run successfully.
+
+# The specified PyTorch, Python, and CUDA versions are not strictly required.
+# Most compatible configurations should work.
 conda create -n pear python=3.9.22
 conda activate pear
+
 pip install -r requirements.txt
 pip install "git+https://github.com/facebookresearch/pytorch3d.git" --no-build-isolation
-pip install chumpy  --no-build-isolation
+pip install chumpy --no-build-isolation
+````
+
+Download the required human body models (FLAME, MANO, and SMPLX) from
+[Google Drive](https://drive.google.com/file/d/1HvJ4WljPhEjoVgFBQurGLoKFN9-9UBb0/view?usp=drive_link)
+and place them under the `assets` directory:
+
+```
+assets/
+├── FLAME/
+├── MANO/
+├── SMPL/
+├── SMPLX/
+├── SMPLX2SMPL/
+├── icons2.png
+├── method.png
+└── teaser.png
 ```
 
-### Second, you need to download three human models (FLAME. MANO, SMPLX) from [huggingface url](https://huggingface.co/spaces/BestWJH/PEAR/tree/main/assets) into the current `assets` folder.
+---
 
+### ⚡ Inference
 
-```
-├── assets
-│   | FLAME
-│   | MANO
-│   | SMPLX
-|   icons2.png
-|   method.png
-|   teaser.png
-```
+All pretrained models will be downloaded automatically.
 
+For video inference, run:
 
-
-### Finally, you can have a try !
-
-`All pretrained models will be downloaded automatically.`
-
-For video inference, you can simply run our visualization interface via
 ```bash
-python app.py 
+python app.py
 ```
-For images inference, you can simply run the code via
+
+For image inference, run:
+
 ```bash
-python inference_images.py --input_path example/images 
+python inference_images.py --input_path example/images
 ```
 
+---
 
+### ⚡ Training
+
+The full training datasets are currently not publicly released.
+However, a sample `.tar` file is provided for demonstration purposes.
+
+Download it from
+[Google Drive](https://drive.google.com/file/d/1e-lQECHBoDS1dmSXbQjHKZ6qQO_X37ZG/view?usp=drive_link)
+and place it under:
+
+```
+ehms_datasets/
+├── 000000.tar
+```
+
+Then run:
+
+```bash
+python train_ehms.py -c train -d 0,1,2,3,4,5,6,7  # Adjust according to your available GPUs
+```
 
 
 ## 🤗 Citation

@@ -1,6 +1,6 @@
 MODEL:
 
-    NAME: 'Gen_Ubody'
+    NAME: 'PEAR_infer'
     add_teeth: True
     flame_assets_dir: 'assets/FLAME'
     smplx_assets_dir: 'assets/SMPLX'
