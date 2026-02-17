@@ -86,7 +86,7 @@ class OurPipeline():
         self.cameras = GS_Camera(**cameras_kwargs).to(self.lightning_fabric.device)
 
 
-        self.ehm = EHM_v2( "assets/FLAME", "assets/SMPLX", "assets/MANO" ).to(self.lightning_fabric.device)  # 12.18 revised
+        self.ehm = EHM_v2( "assets/FLAME", "assets/SMPLX").to(self.lightning_fabric.device)  # 12.18 revised
         self.smplx=self.ehm.smplx
         self.v_template=torch.nn.Parameter(self.ehm.v_template,requires_grad=False)
         self.body_renderer = BodyRenderer("assets/SMPLX", self.body_image_size , focal_length=24.0 ).to(self.lightning_fabric.device) 

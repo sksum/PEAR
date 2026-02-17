@@ -143,7 +143,7 @@ _state = torch.load(ehm_basemodel, map_location='cpu', weights_only=True)
 ehm_model.backbone.load_state_dict(_state['backbone'], strict=False)
 ehm_model.head.load_state_dict(_state['head'], strict=False)
 
-ehm = EHM_v2("assets/FLAME", "assets/SMPLX", "assets/MANO")
+ehm = EHM_v2("assets/FLAME", "assets/SMPLX")
 
 
 # lights = PointLights(device=TORCH_DEVICE, location=[[0.0, -1.0, -10.0]])

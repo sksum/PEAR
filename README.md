@@ -73,14 +73,16 @@ pip install "git+https://github.com/facebookresearch/pytorch3d.git" --no-build-i
 pip install chumpy --no-build-isolation
 ````
 
-Download the required human body models (FLAME, MANO, and SMPLX) from
-[Google Drive](https://drive.google.com/file/d/1HvJ4WljPhEjoVgFBQurGLoKFN9-9UBb0/view?usp=drive_link)
-and place them under the `assets` directory:
+
+- SMPL: Download `SMPL_NEUTRAL.pkl` from [SMPL](https://smpl.is.tue.mpg.de/download.php) and place it in the `assets/SMPL`.
+- SMPLX: Download `SMPLX_NEUTRAL_2020.npz` from [SMPLX](https://smpl-x.is.tue.mpg.de/download.php) and place it in the `assets/SMPLX`.
+- FLAME: Download the `generic_model.pkl` from [FLAME2020](https://flame.is.tue.mpg.de/download.php). Save this file to both `assets/FLAME/FLAME2020/generic_model.pkl` and `assets/SMPLX/flame_generic_model.pkl`.
+- SMPLX2SMPL: unzip `SMPLX2SMPL.zip`.
+
 
 ```
 assets/
 ├── FLAME/
-├── MANO/
 ├── SMPL/
 ├── SMPLX/
 ├── SMPLX2SMPL/

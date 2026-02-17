@@ -11,13 +11,12 @@ from pytorch3d.structures import Meshes
 import time
 from pytorch3d.transforms import matrix_to_rotation_6d, matrix_to_axis_angle, axis_angle_to_matrix, rotation_6d_to_matrix
 class EHM_v2(nn.Module):
-    def __init__(self, flame_assets_dir, smplx_assets_dir, mano_assets_dir,
+    def __init__(self, flame_assets_dir, smplx_assets_dir,
                        n_shape=300, n_exp=50, with_texture=False, add_teeth=True,
                        check_pose=True, use_pca=True, num_pca_comps=6, flat_hand_mean=False, uv_size= 512):
         super().__init__()
         self.smplx = SMPLX(smplx_assets_dir, n_shape=n_shape, n_exp=n_exp, check_pose=check_pose, with_texture = with_texture, add_teeth=add_teeth, uv_size= uv_size)
         self.flame = FLAME(flame_assets_dir, n_shape=n_shape, n_exp=n_exp, with_texture=with_texture, add_teeth=add_teeth) 
-        # self.mano  = MANO(mano_assets_dir, use_pca=use_pca, num_pca_comps=num_pca_comps, flat_hand_mean=flat_hand_mean)  
         
         v_template,  v_head_template  =  self.smplx.v_template.clone(),  self.flame.v_template.clone()
         tbody_joints = vertices2joints(self.smplx.J_regressor, v_template[None]) # [1,55,3]

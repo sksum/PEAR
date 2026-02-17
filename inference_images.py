@@ -270,7 +270,7 @@ def inference( config_name, devices, input_path=None, output_path = None):
     ehm_model = ehm_model.cuda()
 
 
-    ehm = EHM_v2( "assets/FLAME", "assets/SMPLX", "assets/MANO")
+    ehm = EHM_v2( "assets/FLAME", "assets/SMPLX")
     ehm = ehm.cuda()
 
     lights=PointLights(device='cuda:0', location=[[0.0, -1.0, -10.0]])
