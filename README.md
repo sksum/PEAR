@@ -36,7 +36,7 @@
 ## 📰 News
 **[2026.02.02]** Paper release of our PEAR on arXiv!
 
-**[2026.02.02]** The inference code and the first version of the PEAR model have been released! 
+**[2026.02.02]** The inference code and the **first version of the PEAR model** have been released! 
 
 **[2026.02.11]** Training code released.
 
