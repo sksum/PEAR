@@ -40,7 +40,7 @@
 
 **[2026.02.11]** Training code released.
 
-**[TODO]** Training dastasets and **final version of the PEAR model(more accurate in body pose prediction)**.
+**[TODO]** Training dastasets and **final version of the PEAR model(more accurate in body pose prediction as shown in our paper and project page)**.
 
 
 ## 💡 Overview
