@@ -4,7 +4,7 @@
   <h1 align="center"><strong> <img src="assets/icons2.png" width="30" height="30">  PEAR: Pixel-aligned Expressive humAn mesh Recovery</strong></h1>
 
 <p align="center">
-  <a>Jiahao Wu</a></sup>,</span> 
+  <a href="https://github.com/WuJH2001">Jiahao Wu</a></sup>,</span> 
   <a href="http://liuyunfei.net/">Yunfei Liu ✉</a></sup>,</span>
   <a href="https://scholar.google.com/citations?hl=en&user=Xf5_TfcAAAAJ">Lijian Lin</a>, 
   <a href="https://scholar.google.com/citations?hl=en&user=qhp9rIMAAAAJ">Ye Zhu</a>, 
