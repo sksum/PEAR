@@ -147,7 +147,17 @@ If you find this repository useful for your research, please use the following B
 
 ## Acknowledgements 
 
-We would like to thank the authors of prior works, including FLAME, SMPL-X, SMPL, MANO, SMPLest-X, Multi-HMR, and SAM3D-Body.
+We would like to thank the authors of prior works, including 
+
+[1] FLAME, SMPL-X, SMPL, MANO, HMR2, HSMR, Harmer, HMRPro, SAM3D-Body etc.
+
+[2] SMPLest-X: Ultimate Scaling for Expressive Human Pose and Shape Estimation
+
+[3] Multi-HMR: Multi-Person Whole-Body Human Mesh Recovery in a Single Shot
+
+[4] OSX: One-Stage 3D Whole-Body Mesh Recovery with Component Aware Transformer
+
+[5] AiOS: All-in-One-Stage Expressive Human Pose and Shape Estimation
 
 
 ## License
