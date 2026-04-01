@@ -147,7 +147,7 @@ If you find this repository useful for your research, please use the following B
 
 ## Acknowledgements 
 
-We would like to thank the authors of prior works, including 
+We thank the authors of the following works, whose ideas and open-source implementations form the foundation of this project:
 
 [1] FLAME, SMPL-X, SMPL, MANO, HMR2, HSMR, Harmer, HMRPro, SAM3D-Body etc.
 
