@@ -4,7 +4,7 @@
   <h1 align="center"><strong> <img src="assets/icons2.png" width="30" height="30">  PEAR: Pixel-aligned Expressive humAn mesh Recovery</strong></h1>
 
 <p align="center">
-  <a href="https://wujh2001.github.io">Jiahao Wu</a></sup>,</span> 
+  <a href="https://github.com/WuJH2001">Jiahao Wu</a></sup>,</span> 
   <a href="http://liuyunfei.net/">Yunfei Liu ✉</a></sup>,</span>
   <a href="https://scholar.google.com/citations?hl=en&user=Xf5_TfcAAAAJ">Lijian Lin</a>, 
   <a href="https://scholar.google.com/citations?hl=en&user=qhp9rIMAAAAJ">Ye Zhu</a>, 
@@ -36,11 +36,11 @@
 ## 📰 News
 **[2026.02.02]** Paper release of our PEAR on arXiv!
 
-**[2026.02.02]** The inference code and the first version of the PEAR model have been released! 
+**[2026.02.02]** The inference code and the **first version of the PEAR model** have been released!  Try it — the model will be downloaded automatically.
 
 **[2026.02.11]** Training code released.
 
-**[TODO]** Training dastasets and final version of the PEAR model.
+**[TODO]** Training dastasets and **final version of the PEAR model(more accurate in body pose prediction as shown in our paper and project page)**.
 
 
 ## 💡 Overview
@@ -79,6 +79,7 @@ pip install chumpy --no-build-isolation
 - FLAME: Download the `generic_model.pkl` from [FLAME2020](https://flame.is.tue.mpg.de/download.php). Save this file to both `assets/FLAME/FLAME2020/generic_model.pkl` and `assets/SMPLX/flame_generic_model.pkl`.
 - SMPLX2SMPL: unzip `SMPLX2SMPL.zip`.
 
+Or you can download them all at once from this Google Drive [Link](https://drive.google.com/file/d/1HvJ4WljPhEjoVgFBQurGLoKFN9-9UBb0/view) 
 
 ```
 assets/
@@ -147,7 +148,17 @@ If you find this repository useful for your research, please use the following B
 
 ## Acknowledgements 
 
-We would like to thank the authors of prior works, including FLAME, SMPL-X, SMPL, MANO, SMPLest-X, Multi-HMR, and SAM3D-Body.
+We thank the authors of the following works, whose ideas and open-source implementations form the foundation of this project:
+
+[1] FLAME, SMPL-X, SMPL, MANO, HMR2, HSMR, Harmer, HMRPro, SAM3D-Body etc.
+
+[2] SMPLest-X: Ultimate Scaling for Expressive Human Pose and Shape Estimation
+
+[3] Multi-HMR: Multi-Person Whole-Body Human Mesh Recovery in a Single Shot
+
+[4] OSX: One-Stage 3D Whole-Body Mesh Recovery with Component Aware Transformer
+
+[5] AiOS: All-in-One-Stage Expressive Human Pose and Shape Estimation
 
 
 ## License
