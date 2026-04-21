@@ -8,7 +8,7 @@ torchaudio
 torchgeometry
 torchmetrics
 
-open3d==0.17.0
+open3d==0.18.0
 opencv-contrib-python==4.9.0.80
 opencv-python==4.9.0.80
 opencv-python-headless==4.9.0.80
